@@ -1,4 +1,4 @@
-﻿using FridgeDate.Core.Interfaces;
+﻿using FridgeDate.Data.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;

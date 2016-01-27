@@ -35,9 +35,9 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
+    <Folder Include="Interfaces\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Models\BarCode.cs" />
     <Compile Include="Models\BarCodeType.cs" />
     <Compile Include="Models\FoodItem.cs" />
