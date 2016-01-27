@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FridgeDate", "FridgeDate\FridgeDate.csproj", "{52D3FE94-0711-4FD0-834A-BDB3AD741676}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PublishScripts", "PublishScripts", "{8C81FDD3-3C35-4AE6-8FDF-6C42B5477941}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{1E183A5B-EEBD-4F8A-9D8A-2A634EA38F9B}"
@@ -18,11 +16,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{
 		PublishScripts\Templates\FridgeDate.param.dev.json = PublishScripts\Templates\FridgeDate.param.dev.json
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FridgeDate.DAL", "FridgeDate.DAL\FridgeDate.DAL.csproj", "{A24FB17C-733B-4E31-A6D3-2BBCECAA8574}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FridgeDate.Core", "FridgeDate.Core\FridgeDate.Core.csproj", "{4A5458D8-915D-41B6-BB92-51532BD9DE31}"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "FridgeDate.API", "FridgeDate.API\FridgeDate.API.xproj", "{7FEBE2A9-3D6D-4382-A50A-2CF74CC6AF24}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FridgeDate.Data", "FridgeDate.Data\FridgeDate.Data.csproj", "{1D1E3E7E-1A6B-4075-A4C6-CAE39DF8060E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,14 +28,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{52D3FE94-0711-4FD0-834A-BDB3AD741676}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{52D3FE94-0711-4FD0-834A-BDB3AD741676}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{52D3FE94-0711-4FD0-834A-BDB3AD741676}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{52D3FE94-0711-4FD0-834A-BDB3AD741676}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A24FB17C-733B-4E31-A6D3-2BBCECAA8574}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A24FB17C-733B-4E31-A6D3-2BBCECAA8574}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A24FB17C-733B-4E31-A6D3-2BBCECAA8574}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A24FB17C-733B-4E31-A6D3-2BBCECAA8574}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4A5458D8-915D-41B6-BB92-51532BD9DE31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4A5458D8-915D-41B6-BB92-51532BD9DE31}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4A5458D8-915D-41B6-BB92-51532BD9DE31}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -46,6 +36,10 @@ Global
 		{7FEBE2A9-3D6D-4382-A50A-2CF74CC6AF24}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7FEBE2A9-3D6D-4382-A50A-2CF74CC6AF24}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7FEBE2A9-3D6D-4382-A50A-2CF74CC6AF24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D1E3E7E-1A6B-4075-A4C6-CAE39DF8060E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D1E3E7E-1A6B-4075-A4C6-CAE39DF8060E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D1E3E7E-1A6B-4075-A4C6-CAE39DF8060E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D1E3E7E-1A6B-4075-A4C6-CAE39DF8060E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

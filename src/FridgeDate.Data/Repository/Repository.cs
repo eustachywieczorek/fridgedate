@@ -1,15 +1,14 @@
-﻿using Microsoft.Data.Entity;
+﻿using FridgeDate.Core.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace FridgeDate.DAL.Repository
+namespace FridgeDate.Data.Repository
 {
     // Based on: http://www.asp.net/mvc/overview/older-versions/getting-started-with-ef-5-using-mvc-4/implementing-the-repository-and-unit-of-work-patterns-in-an-asp-net-mvc-application
-    public class Repository<TEntity> where TEntity : class
+    public class Repository<TEntity>: IRepository<TEntity> where TEntity : class
     {
         internal FridgeDateContext context;
         internal DbSet<TEntity> dbSet;
@@ -35,7 +34,7 @@ namespace FridgeDate.DAL.Repository
             foreach (var includeProperty in includeProperties.Split
                 (new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
             {
-                //query = query.Include(includeProperty);
+                query = query.Include(includeProperty);
             }
 
             if (orderBy != null)
@@ -50,7 +49,7 @@ namespace FridgeDate.DAL.Repository
 
         public virtual TEntity GetByID(object id)
         {
-            return null;
+            return dbSet.Find(id);
         }
 
         public virtual void Insert(TEntity entity)
