@@ -1,42 +1,42 @@
-﻿using FridgeDate.Data.Interfaces;
-using FridgeDate.Data.Models;
-using System;
+﻿using AutoMapper;
+using FridgeDate.Data.Interfaces;
+using FridgeDate.Core.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace FridgeDate.API.Controllers
 {
     public class FoodItemController : ApiController
     {
-        private IRepository<FoodItem> _foodItemRepository;
-        public FoodItemController(IRepository<FoodItem> foodItemRepository)
+        private IRepository<Data.Models.FoodItem> _foodItemRepository;
+        private IMapper _mapper;
+        public FoodItemController(IRepository<Data.Models.FoodItem> foodItemRepository, IMapper mapper)
         {
             _foodItemRepository = foodItemRepository;
+            _mapper = mapper;
         }
 
         public IEnumerable<FoodItem> Get()
         {
-            return _foodItemRepository.Get();
+            return _mapper.Map<IEnumerable<FoodItem>>(_foodItemRepository.Get());
         }
 
         public FoodItem Get(int id)
         {
-            return _foodItemRepository.GetByID(id);
+           
+            return _mapper.Map<FoodItem>(_foodItemRepository.GetByID(id));
         }
 
         // POST api/values
         public void Post([FromBody]FoodItem value)
         {
-            _foodItemRepository.Insert(value);
+            _foodItemRepository.Insert(_mapper.Map<Data.Models.FoodItem>(value));
         }
 
         // PUT api/values/5
         public void Put(int id, [FromBody]FoodItem value)
         {
-            _foodItemRepository.Update(value);
+            _foodItemRepository.Update(_mapper.Map<Data.Models.FoodItem>(value));
         }
 
         // DELETE api/values/5
