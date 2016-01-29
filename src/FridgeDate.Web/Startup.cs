@@ -1,4 +1,5 @@
-﻿using Microsoft.Owin;
+﻿using FridgeDate.Web.App_Start;
+using Microsoft.Owin;
 using Owin;
 
 [assembly: OwinStartupAttribute(typeof(FridgeDate.Web.Startup))]
@@ -9,6 +10,7 @@ namespace FridgeDate.Web
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
+            UnityConfig.RegisterTypes(UnityConfig.GetConfiguredContainer());
         }
     }
 }

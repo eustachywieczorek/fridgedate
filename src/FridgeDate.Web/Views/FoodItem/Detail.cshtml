@@ -1,0 +1,42 @@
+﻿@model FridgeDate.Web.Models.FoodItemViewModel
+
+@{
+    ViewBag.Title = "View";
+}
+
+<h2>View</h2>
+
+<div>
+    <h4>FoodItemViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShelfLifeDays)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShelfLifeDays)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BarCodeId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BarCodeId)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

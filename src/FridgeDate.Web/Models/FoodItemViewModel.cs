@@ -13,7 +13,7 @@ namespace FridgeDate.Web.Models
         public int ShelfLifeDays { get; set; }
 
         [Display(Name = "Barcode id")]
-        public int BarCodeId { get; set; }
+        public string BarCodeId { get; set; }
 
         //public int MyProperty { get; set; }
     }

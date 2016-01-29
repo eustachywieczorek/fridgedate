@@ -52,30 +52,31 @@ namespace FridgeDate.Data.Repository
             return dbSet.Find(id);
         }
 
-        public virtual void Insert(TEntity entity)
+        public virtual TEntity Insert(TEntity entity)
         {
-            dbSet.Add(entity);
+            return dbSet.Add(entity);
         }
 
-        public virtual void Delete(object id)
+        public virtual TEntity Delete(object id)
         {
             TEntity entityToDelete = null;
-            Delete(entityToDelete);
+            return Delete(entityToDelete);
         }
 
-        public virtual void Delete(TEntity entityToDelete)
+        public virtual TEntity Delete(TEntity entityToDelete)
         {
             if (context.Entry(entityToDelete).State == EntityState.Detached)
             {
                 dbSet.Attach(entityToDelete);
             }
-            dbSet.Remove(entityToDelete);
+            return dbSet.Remove(entityToDelete);
         }
 
-        public virtual void Update(TEntity entityToUpdate)
+        public virtual TEntity Update(TEntity entityToUpdate)
         {
-            dbSet.Attach(entityToUpdate);
+            var updatedEntity = dbSet.Attach(entityToUpdate);
             context.Entry(entityToUpdate).State = EntityState.Modified;
+            return updatedEntity;
         }
     }
 }
