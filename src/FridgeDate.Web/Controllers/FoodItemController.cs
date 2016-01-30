@@ -5,10 +5,13 @@ using FridgeDate.Web.Models;
 using Refit;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using ZXing;
 
 namespace FridgeDate.Web.Controllers
 {
@@ -46,10 +49,30 @@ namespace FridgeDate.Web.Controllers
             {
                 var foodItem = _mapper.Map<FoodItem>(model);
                 foodItem.Id = Guid.NewGuid().ToString();
-                foodItem.BarCode = new BarCode() { Identifier = model.BarCodeId, Type = BarCodeType.Regular };
+
+                if (model.ImageUpload != null && model.ImageUpload.ContentLength > 0)
+                {
+                    var uploadDir = "~/uploads";
+                    var imagePath = Path.Combine(Server.MapPath(uploadDir), model.ImageUpload.FileName);
+                    var imageUrl = Path.Combine(uploadDir, model.ImageUpload.FileName);
+                    model.ImageUpload.SaveAs(imagePath);
+
+                    IBarcodeReader reader = new BarcodeReader();
+                    var barcodeBitmap = (Bitmap)Bitmap.FromFile(imagePath);
+                    var result = reader.Decode(barcodeBitmap);
+                    if (result != null)
+                    {
+                        foodItem.BarCode = new BarCode { Identifier = result.Text, Type = result.BarcodeFormat == BarcodeFormat.QR_CODE ? BarCodeType.QR : BarCodeType.Regular };
+                        model.BarCodeId = result.Text;
+                    }
+                } else if (!string.IsNullOrEmpty(model.BarCodeId))
+                {
+                    foodItem.BarCode = new BarCode() { Identifier = model.BarCodeId, Type = BarCodeType.Regular };
+                }
+
                 var createdFoodItem = await _api.Create(foodItem);
             }
-            return View(model);
+            return View("Detail", model);
         }
     }
 }

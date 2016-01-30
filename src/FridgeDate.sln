@@ -24,6 +24,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FridgeDate.API", "FridgeDat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FridgeDate.Web", "FridgeDate.Web\FridgeDate.Web.csproj", "{68F6231E-07E9-41BA-A4D0-089821D5EBF1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FridgeDate.Tests", "FridgeDate.Tests\FridgeDate.Tests.csproj", "{6A96BBF0-8AF4-4BFA-80BE-4779E80E3182}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -46,6 +48,10 @@ Global
 		{68F6231E-07E9-41BA-A4D0-089821D5EBF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{68F6231E-07E9-41BA-A4D0-089821D5EBF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{68F6231E-07E9-41BA-A4D0-089821D5EBF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A96BBF0-8AF4-4BFA-80BE-4779E80E3182}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A96BBF0-8AF4-4BFA-80BE-4779E80E3182}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A96BBF0-8AF4-4BFA-80BE-4779E80E3182}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A96BBF0-8AF4-4BFA-80BE-4779E80E3182}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

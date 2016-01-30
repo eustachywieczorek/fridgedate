@@ -15,7 +15,8 @@ namespace FridgeDate.API
 			var container = new UnityContainer();
             container.RegisterType<IRepository<FoodItem>, Repository<FoodItem>>();
             container.RegisterInstance<IMapper>(MapperBootstap.CreateMapper());
-            
+            container.RegisterType<IUnitOfWork, UnitOfWork>();
+
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
 
         }

@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="FridgeDateContext.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
+    <Compile Include="Interfaces\IUnitOfWork.cs" />
     <Compile Include="Models\BarCode.cs" />
     <Compile Include="Models\BarCodeType.cs" />
     <Compile Include="Models\FoodItem.cs" />

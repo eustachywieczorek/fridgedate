@@ -3,17 +3,18 @@ using FridgeDate.Core.Models;
 using System.Collections.Generic;
 using System.Web.Http;
 using FridgeDate.Data.Repository;
+using FridgeDate.Data.Interfaces;
 
 namespace FridgeDate.API.Controllers
 {
     public class FoodItemController : ApiController
     {
         private IMapper _mapper;
-        private UnitOfWork _unitOfWork;
-        public FoodItemController(IMapper mapper)
+        private IUnitOfWork _unitOfWork;
+        public FoodItemController(IMapper mapper, IUnitOfWork unitOfWork)
         {
             _mapper = mapper;
-            _unitOfWork = new UnitOfWork();
+            _unitOfWork = unitOfWork;
         }
 
         public IEnumerable<FoodItem> Get()
@@ -21,9 +22,8 @@ namespace FridgeDate.API.Controllers
             return _mapper.Map<IEnumerable<FoodItem>>(_unitOfWork.FoodItemRepository.Get());
         }
 
-        public FoodItem Get(int id)
-        {
-           
+        public FoodItem Get(string id)
+        {           
             return _mapper.Map<FoodItem>(_unitOfWork.FoodItemRepository.GetByID(id));
         }
 
@@ -34,7 +34,7 @@ namespace FridgeDate.API.Controllers
         }
 
 
-        public void Put(int id, [FromBody]FoodItem foodItem)
+        public void Put(string id, [FromBody]FoodItem foodItem)
         {
             _unitOfWork.FoodItemRepository.Update(_mapper.Map<Data.Models.FoodItem>(foodItem));
             _unitOfWork.Save();

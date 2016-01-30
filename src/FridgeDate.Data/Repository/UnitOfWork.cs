@@ -4,7 +4,7 @@ using System;
 
 namespace FridgeDate.Data.Repository
 {
-    public class UnitOfWork : IDisposable
+    public class UnitOfWork : IUnitOfWork, IDisposable
     {
         private FridgeDateContext context = new FridgeDateContext();
         private IRepository<User> userRepository;

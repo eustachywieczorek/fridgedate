@@ -2,6 +2,7 @@
 {
     public enum BarCodeType
     {
-        Regular
+        Regular,
+        QR
     }
 }

@@ -9,10 +9,9 @@ namespace FridgeDate.Web
         {
             var config = new MapperConfiguration(
             c => {
-                c.CreateMap<FoodItemViewModel, Core.Models.FoodItem>().ReverseMap();
-                //c.CreateMap<BarCode, Core.Models.BarCode>().ReverseMap();
-                //c.CreateMap<User, Core.Models.User>().ReverseMap();
-                //c.CreateMap<FoodItemUser, Core.Models.FoodItemUser>().ReverseMap();
+                c.CreateMap<FoodItemViewModel, Core.Models.FoodItem>();
+                c.CreateMap<Core.Models.FoodItem, FoodItemViewModel>()
+                    .ForMember(dest => dest.BarCodeId, p => p.MapFrom(src => src.BarCode.Identifier));
             }
             );
             return config.CreateMapper();
