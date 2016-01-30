@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FridgeDate.Web.Interfaces
+namespace FridgeDate.Core.Interfaces
 {
     public interface IFridgeDateApi<T, in TKey> where T : class
     {

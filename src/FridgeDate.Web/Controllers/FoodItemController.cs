@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
+using FridgeDate.Core.Interfaces;
 using FridgeDate.Core.Models;
-using FridgeDate.Web.Interfaces;
 using FridgeDate.Web.Models;
 using Refit;
 using System;

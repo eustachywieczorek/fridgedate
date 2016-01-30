@@ -62,9 +62,9 @@ namespace FridgeDate.Tests.Fakes
 
         public TEntity Update(TEntity entityToUpdate)
         {
-            var key = _collection.FirstOrDefault(c => c.Value == entityToUpdate).Key;
-            _collection.Remove(key);
-            _collection.Add(key, entityToUpdate);
+            dynamic e = entityToUpdate;
+            _collection.Remove(e.Id);
+            _collection.Add(e.Id, entityToUpdate);
             return entityToUpdate;
         }
 

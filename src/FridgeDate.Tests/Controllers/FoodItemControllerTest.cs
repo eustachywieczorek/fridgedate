@@ -7,6 +7,7 @@ using FridgeDate.API;
 using FridgeDate.Tests.Fakes;
 using FridgeDate.Data.Interfaces;
 using FridgeDate.Data.Models;
+using AutoMapper;
 
 namespace FridgeDate.Tests.Controllers
 {
@@ -17,15 +18,17 @@ namespace FridgeDate.Tests.Controllers
         private FoodItemController _controller;
         private FakeRepository<FoodItem> _foodItemRepository;
         private FoodItem _foodItem;
+        private IMapper _mapper;
         public FoodItemControllerTest()
         {
             _unitOfWork = new FakeUnitOfWork();
+            _mapper = MapperBootstap.CreateMapper();
         }
 
         [TestInitialize]
         public void Setup()
         {
-            _controller = new FoodItemController(MapperBootstap.CreateMapper(), _unitOfWork);
+            _controller = new FoodItemController(_mapper, _unitOfWork);
             _foodItemRepository = _unitOfWork.FoodItemRepository as FakeRepository<FoodItem>;
             _foodItem = _foodItemRepository.Insert(new FoodItem()
             {
@@ -77,13 +80,9 @@ namespace FridgeDate.Tests.Controllers
         [TestMethod]
         public void Put()
         {
-            // Arrange
-            ValuesController controller = new ValuesController();
-
-            // Act
-            controller.Put(5, "value");
-
-            // Assert
+            _foodItem.Name = "Milk";
+            _controller.Put(_foodItem.Id, _mapper.Map<Core.Models.FoodItem>(_foodItem));
+            Assert.AreEqual("Milk", _controller.Get(_foodItem.Id).Name);
         }
 
         [TestMethod]
