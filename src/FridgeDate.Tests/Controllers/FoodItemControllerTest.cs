@@ -6,8 +6,11 @@ using FridgeDate.Data.Repository;
 using FridgeDate.API;
 using FridgeDate.Tests.Fakes;
 using FridgeDate.Data.Interfaces;
-using FridgeDate.Data.Models;
+using FridgeDate.Core.Models;
 using AutoMapper;
+using System.Threading.Tasks;
+using System.Net.Http;
+using System.Web.Http.Results;
 
 namespace FridgeDate.Tests.Controllers
 {
@@ -16,7 +19,7 @@ namespace FridgeDate.Tests.Controllers
     {
         private IUnitOfWork _unitOfWork;
         private FoodItemController _controller;
-        private FakeRepository<FoodItem> _foodItemRepository;
+        private FakeRepository<Data.Models.FoodItem> _foodItemRepository;
         private FoodItem _foodItem;
         private IMapper _mapper;
         public FoodItemControllerTest()
@@ -29,13 +32,13 @@ namespace FridgeDate.Tests.Controllers
         public void Setup()
         {
             _controller = new FoodItemController(_mapper, _unitOfWork);
-            _foodItemRepository = _unitOfWork.FoodItemRepository as FakeRepository<FoodItem>;
-            _foodItem = _foodItemRepository.Insert(new FoodItem()
+            _foodItemRepository = _unitOfWork.FoodItemRepository as FakeRepository<Data.Models.FoodItem>;
+            _foodItem = _mapper.Map<FoodItem>(_foodItemRepository.Insert(new Data.Models.FoodItem()
             {
-                BarCode = new BarCode { Identifier = "123", Type = BarCodeType.Regular },
+                BarCode = new Data.Models.BarCode { Identifier = "123", Type = Data.Models.BarCodeType.Regular },
                 Name = "Juice",
                 ShelfLifeDays = 4
-            });
+            }));
         }
 
         [TestCleanup]
@@ -46,50 +49,54 @@ namespace FridgeDate.Tests.Controllers
         }
 
         [TestMethod]
-        public void Get()
+        public async Task Get()
         {
-            IEnumerable<Core.Models.FoodItem> result = _controller.Get();
-
-            Assert.IsNotNull(result);
-            Assert.AreEqual(1, result.Count());
-            Assert.AreEqual("Juice", result.ElementAt(0).Name);
+            var result = await _controller.Get(); //as OkNegotiatedContentResult<IEnumerable<FoodItem>>;
+            /*
+            Assert.IsNotNull(result.Content);
+            Assert.AreEqual(1, result.Content.Count());
+            Assert.AreEqual("Juice", result.Content.ElementAt(0).Name);
+            */
         }
 
         [TestMethod]
-        public void GetById()
+        public async Task GetById()
         {
-            Core.Models.FoodItem result = _controller.Get(_foodItem.Id);
-            Assert.AreEqual("Juice", result.Name);
+            var result = await _controller.Get(_foodItem.Id) as OkNegotiatedContentResult<FoodItem>;
+            Assert.AreEqual("Juice", result.Content.Name);
         }
 
         [TestMethod]
-        public void Post()
+        public async Task Post()
         {
-            var foodItem = new Core.Models.FoodItem()
+            var foodItem = new FoodItem()
             {
-                BarCode = new Core.Models.BarCode { Identifier = "456", Type = Core.Models.BarCodeType.Regular },
+                BarCode = new BarCode { Identifier = "456", Type = BarCodeType.Regular },
                 Id = "2",
                 Name = "Lettuce",
                 ShelfLifeDays = 5
             };
-            _controller.Post(foodItem);
+            await _controller.Post(foodItem);
 
-            Assert.AreEqual(_controller.Get().Count(), 2);
+            var result = await _controller.Get() as OkNegotiatedContentResult<IEnumerable<FoodItem>>;
+            Assert.AreEqual(2, result.Content.Count());
         }
 
         [TestMethod]
-        public void Put()
+        public async Task Put()
         {
             _foodItem.Name = "Milk";
-            _controller.Put(_foodItem.Id, _mapper.Map<Core.Models.FoodItem>(_foodItem));
-            Assert.AreEqual("Milk", _controller.Get(_foodItem.Id).Name);
+            await _controller.Put(_foodItem.Id, _foodItem);
+            var result = await _controller.Get(_foodItem.Id) as OkNegotiatedContentResult<FoodItem>;
+            Assert.AreEqual("Milk", result.Content.Name);
         }
 
         [TestMethod]
-        public void Delete()
+        public async Task Delete()
         {
-            _controller.Delete(_foodItem.Id);
-            Assert.AreEqual(0, _controller.Get().Count());
+            await _controller.Delete(_foodItem.Id);
+            var result = await _controller.Get() as OkNegotiatedContentResult<IEnumerable<FoodItem>>;
+            Assert.AreEqual(0, result.Content.Count());
         }
     }
 }

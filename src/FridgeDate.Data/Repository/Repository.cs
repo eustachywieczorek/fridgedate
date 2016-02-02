@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace FridgeDate.Data.Repository
 {
@@ -19,7 +20,7 @@ namespace FridgeDate.Data.Repository
             this.dbSet = context.Set<TEntity>();
         }
 
-        public virtual IEnumerable<TEntity> Get(
+        public virtual async Task<IEnumerable<TEntity>> Get(
     Expression<Func<TEntity, bool>> filter = null,
     Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
     string includeProperties = "")
@@ -39,17 +40,17 @@ namespace FridgeDate.Data.Repository
 
             if (orderBy != null)
             {
-                return orderBy(query).ToList();
+                return await orderBy(query).ToListAsync();
             }
             else
             {
-                return query.ToList();
+                return await query.ToListAsync();
             }
         }
 
-        public virtual TEntity GetByID(object id)
+        public virtual async Task<TEntity> GetByID(object id)
         {
-            return dbSet.Find(id);
+            return await dbSet.FindAsync(id);
         }
 
         public virtual TEntity Insert(TEntity entity)
@@ -57,7 +58,7 @@ namespace FridgeDate.Data.Repository
             return dbSet.Add(entity);
         }
 
-        public virtual TEntity Delete(object id)
+        public virtual TEntity DeleteById(object id)
         {
             TEntity entityToDelete = null;
             return Delete(entityToDelete);

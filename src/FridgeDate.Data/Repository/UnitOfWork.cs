@@ -1,6 +1,7 @@
 ﻿using FridgeDate.Data.Interfaces;
 using FridgeDate.Data.Models;
 using System;
+using System.Threading.Tasks;
 
 namespace FridgeDate.Data.Repository
 {
@@ -11,9 +12,9 @@ namespace FridgeDate.Data.Repository
         private IRepository<FoodItem> foodItemRepository;
         private IRepository<FoodItemUser> foodItemForUserRepository;
 
-        public void Save()
+        public async Task Save()
         {
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
 
 

@@ -19,11 +19,11 @@ namespace FridgeDate.Tests.Fakes
         public TEntity Delete(TEntity entityToDelete)
         {
             if (_collection.ContainsValue(entityToDelete))
-                return Delete(_collection.First(e => e.Value == entityToDelete).Key);
+                return DeleteById(_collection.First(e => e.Value == entityToDelete).Key);
             return null;
         }
 
-        public TEntity Delete(object id)
+        public TEntity DeleteById(object id)
         {
             string key = id.ToString();
             if (_collection.ContainsKey(key))
@@ -36,19 +36,25 @@ namespace FridgeDate.Tests.Fakes
             return null;
         }
 
-        public IEnumerable<TEntity> Get(Expression<Func<TEntity, bool>> filter = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, string includeProperties = "")
+        public async Task<IEnumerable<TEntity>> Get(Expression<Func<TEntity, bool>> filter = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, string includeProperties = "")
         {
-            if(filter != null)
-                return _collection.Values.AsQueryable().Where(filter);
-            return _collection.Values;
+            return await Task.Run<IEnumerable<TEntity>>(() =>
+            {
+                if (filter != null)
+                    return _collection.Values.AsQueryable().Where(filter);
+                return _collection.Values;
+            });
         }
 
-        public TEntity GetByID(object id)
+        public async Task<TEntity> GetByID(object id)
         {
-            string key = id.ToString();
-            if (_collection.ContainsKey(key))
-                return _collection[key];
-            return null;
+            return await Task.Run(() =>
+            {
+                string key = id.ToString();
+                if (_collection.ContainsKey(key))
+                    return _collection[key];
+                return null;
+            });
         }
 
         public TEntity Insert(TEntity entity)

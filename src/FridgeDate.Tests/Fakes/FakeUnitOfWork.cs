@@ -44,9 +44,12 @@ namespace FridgeDate.Tests.Fakes
             }
         }
 
-        public void Save()
+        public Task Save()
         {
-            
+            return Task.Run(() =>
+            {
+                return;
+            });
         }
     }
 }

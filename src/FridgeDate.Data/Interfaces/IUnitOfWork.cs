@@ -12,7 +12,7 @@ namespace FridgeDate.Data.Interfaces
         IRepository<User> UserRepository { get; }
         IRepository<FoodItem> FoodItemRepository { get; }
         IRepository<FoodItemUser> FoodItemForUserRepository { get; }
-        void Save();
+        Task Save();
 
     }
 }
