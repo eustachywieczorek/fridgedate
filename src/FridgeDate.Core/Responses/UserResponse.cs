@@ -8,9 +8,8 @@ using System.Threading.Tasks;
 
 namespace FridgeDate.Core.Responses
 {
-    public class FoodItemResponse : HttpResponseMessage
+    public class UserResponse: HttpResponseMessage
     {
-        public new FoodItem Content;
-
+        public new User Content;
     }
 }
