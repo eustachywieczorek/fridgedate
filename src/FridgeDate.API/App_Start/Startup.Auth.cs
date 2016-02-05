@@ -55,9 +55,9 @@ namespace FridgeDate.API
             //    consumerKey: "",
             //    consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //    appId: "",
-            //    appSecret: "");
+            app.UseFacebookAuthentication(
+                appId: "185612891797560",
+                appSecret: "08a811e19cf7f9374af57b9670560e0a");
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{
