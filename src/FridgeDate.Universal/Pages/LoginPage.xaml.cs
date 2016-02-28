@@ -15,7 +15,7 @@ namespace FridgeDate.Universal.Pages
         private IAccountApi _accountApi;
         public LoginPage()
         {
-            _accountApi = RestService.For<IAccountApi>("http://fridgedateapi.azurewebsites.net");
+            _accountApi = RestService.For<IAccountApi>(Core.Settings.Values.BASE_URL);
             Task.Run(async () =>
             {
                 await SetupExternalProviders();
@@ -26,7 +26,7 @@ namespace FridgeDate.Universal.Pages
         private async Task SetupExternalProviders()
         {
             var externalLogins = await _accountApi.GetExternalLogins("login");
-            var test = externalLogins.Content;
+            var test = externalLogins;
         }
     }
 }
