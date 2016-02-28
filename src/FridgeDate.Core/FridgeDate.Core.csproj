@@ -36,6 +36,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="DTO\ExternalLogin.cs" />
     <Compile Include="Interfaces\IAccountApi.cs" />
     <Compile Include="Interfaces\IFridgeDateApi.cs" />
     <Compile Include="Models\BarCode.cs" />
@@ -50,9 +51,17 @@
     <Compile Include="Requests\RegisterRequest.cs" />
     <Compile Include="Requests\RemoveLoginRequest.cs" />
     <Compile Include="Requests\SetPasswordRequest.cs" />
+    <Compile Include="Resources\GlobalApp.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GlobalApp.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Responses\ChallengeResult.cs" />
+    <Compile Include="Responses\ExternalLoginsResponse.cs" />
     <Compile Include="Responses\FoodItemResponse.cs" />
     <Compile Include="Responses\ManageInfoResponse.cs" />
     <Compile Include="Responses\UserResponse.cs" />
+    <Compile Include="Settings\Values.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -67,6 +76,12 @@
       <HintPath>..\packages\refit.2.4.1\lib\Portable-Net45+NetCore45+WP8+WPA81\Refit.dll</HintPath>
       <Private>True</Private>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\GlobalApp.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>GlobalApp.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\refit.2.4.1\build\portable-net45+netcore45+wp8+wpa81+monoandroid+xamarin.ios10\refit.targets" Condition="Exists('..\packages\refit.2.4.1\build\portable-net45+netcore45+wp8+wpa81+monoandroid+xamarin.ios10\refit.targets')" />

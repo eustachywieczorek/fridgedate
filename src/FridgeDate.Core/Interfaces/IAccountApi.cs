@@ -34,10 +34,10 @@ namespace FridgeDate.Core.Interfaces
         Task<HttpResponseMessage> GetExternalLogin(string provider, string error = null);
 
         [Get("/api/Account/ExternalLogins?returnUrl={returnUrl}&generateState={generateState}")]
-        Task<HttpResponseMessage> GetExternalLogins(string returnUrl, bool generateState = false);
+        Task<IEnumerable<ExternalLogin>> GetExternalLogins(string returnUrl, bool generateState = false);
         [Post("/api/Account/Register")]
-        Task<HttpResponseMessage> Register(RegisterRequest request);
-
+        Task<HttpResponseMessage> Register([Body] RegisterRequest request);
+    
         [Post("/api/Account/RegisterExternal")]
         Task<HttpResponseMessage> RegisterExternal(RegisterExternalRequest request);
 
