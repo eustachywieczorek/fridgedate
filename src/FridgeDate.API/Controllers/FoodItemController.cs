@@ -8,52 +8,47 @@ using System.Threading.Tasks;
 
 namespace FridgeDate.API.Controllers
 {
-    public class FoodItemController : ApiController
+    public class FoodItemController : BaseApiController
     {
-        private IMapper _mapper;
-        private IUnitOfWork _unitOfWork;
-        public FoodItemController(IMapper mapper, IUnitOfWork unitOfWork)
+        public FoodItemController(IMapper mapper, IUnitOfWork unitOfWork): base(mapper, unitOfWork)
         {
-            _mapper = mapper;
-            _unitOfWork = unitOfWork;
         }
 
         public async Task<IHttpActionResult> Get()
         {
-            var foodItems = await _unitOfWork.FoodItemRepository.Get();
-            var t = _mapper.Map<IEnumerable<FoodItem>>(foodItems);
+            var foodItems = await UnitOfWork.FoodItemRepository.Get();
+            var t = Mapper.Map<IEnumerable<FoodItem>>(foodItems);
             return Ok(t);
         }
 
         public async Task<IHttpActionResult> Get(string id)
         {           
-            var foodItem = await _unitOfWork.FoodItemRepository.GetByID(id);
+            var foodItem = await UnitOfWork.FoodItemRepository.GetByID(id);
             if (foodItem == null)
                 return NotFound();
-            return Ok(_mapper.Map<FoodItem>(foodItem));
+            return Ok(Mapper.Map<FoodItem>(foodItem));
         }
 
         public async Task<IHttpActionResult> Post([FromBody]FoodItem foodItem)
         {
-            var savedFoodItem = _unitOfWork.FoodItemRepository.Insert(_mapper.Map<Data.Models.FoodItem>(foodItem));
-            await _unitOfWork.Save();
+            var savedFoodItem = UnitOfWork.FoodItemRepository.Insert(Mapper.Map<Data.Models.FoodItem>(foodItem));
+            await UnitOfWork.Save();
             return Ok(savedFoodItem);
         }
 
 
         public async Task<IHttpActionResult> Put(string id, [FromBody]FoodItem foodItem)
         {
-            var updatedFoodItem = _unitOfWork.FoodItemRepository.Update(_mapper.Map<Data.Models.FoodItem>(foodItem));
-            await _unitOfWork.Save();
+            var updatedFoodItem = UnitOfWork.FoodItemRepository.Update(Mapper.Map<Data.Models.FoodItem>(foodItem));
+            await UnitOfWork.Save();
             return Ok(updatedFoodItem);
         }
 
 
         public async Task<IHttpActionResult> Delete(string id)
         {
-
-            var deletedFoodItem = _unitOfWork.FoodItemRepository.DeleteById(id);
-            await _unitOfWork.Save();
+            var deletedFoodItem = UnitOfWork.FoodItemRepository.DeleteById(id);
+            await UnitOfWork.Save();
             return Ok(deletedFoodItem);
         }
     }
