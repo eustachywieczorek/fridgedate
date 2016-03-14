@@ -7,12 +7,11 @@ using System.Threading.Tasks;
 
 namespace FridgeDate.Data.Interfaces
 {
-    public interface IUnitOfWork
+    public interface IUnitOfWork 
     {
         IRepository<User> UserRepository { get; }
         IRepository<FoodItem> FoodItemRepository { get; }
         IRepository<FoodItemUser> FoodItemForUserRepository { get; }
         Task Save();
-
     }
 }
