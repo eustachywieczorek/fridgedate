@@ -21,13 +21,15 @@ namespace FridgeDate.Android.Activities
     public class FoodItemsActivity : Activity
     {
         private ListView _foodItemsListView;
-        private IFridgeDateApi<FoodItemUser, string> _foodItemsApi; 
+        private IFridgeDateApi<FoodItemUser, string> _foodItemsApi;
+        private IUserApi _userApi;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
-            _foodItemsApi = RestService.For<IFridgeDateApi<FoodItemUser, string>>(Core.Settings.Values.BASE_URL + "/foodItemsUser");
+            _foodItemsApi = RestService.For<IFridgeDateApi<FoodItemUser, string>>(Core.Settings.Values.BASE_URL);
+            _userApi = RestService.For<IUserApi>(Core.Settings.Values.BASE_URL + "/User");
             var progressBar = new ProgressBar(this)
             {
                 LayoutParameters = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WrapContent,
@@ -42,7 +44,7 @@ namespace FridgeDate.Android.Activities
 
         private async Task SetFoodItems(ProgressBar progressBar)
         {
-            var foodItems = await _foodItemsApi.ReadAll();
+            var foodItems = await _userApi.GetFoodItemsForUser();
             _foodItemsListView = FindViewById<ListView>(Resource.Id.lwItems);
             _foodItemsListView.EmptyView = progressBar;
             _foodItemsListView.Adapter = new FoodItemsAdapter(this, foodItems.ToList());

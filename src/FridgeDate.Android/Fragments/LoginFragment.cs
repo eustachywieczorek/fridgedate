@@ -18,20 +18,13 @@ namespace FridgeDate.Android.Fragments
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            // Use this to return your custom view for this Fragment
-            // return inflater.Inflate(Resource.Layout.YourFragment, container, false);
+            var view = inflater.Inflate(Resource.Layout.LoginFragment, container, false);
             var loginActivity = (LoginActivity)this.Activity;
-
-
-            var linearLayout = new CommonLinearLayout(Activity);
-            var btnLoginExternal = new Button(Activity);
-            btnLoginExternal.Click += async (sender, e) => { await loginActivity.LoginWithFacebook(); };
-            btnLoginExternal.Text = "Login with Facebook";
-            var txtRegister = new TextView(Activity) {Text = "or sign up with email"};
+            var btnLoginFacebook = view.FindViewById<Button>(Resource.Id.btnFacebook);
+            btnLoginFacebook.Click += async (sender, e) => { await loginActivity.LoginWithFacebook(); };
+            var txtRegister = view.FindViewById<TextView>(Resource.Id.txtRegister);
             txtRegister.Click += (sender, e) => { loginActivity.ShowRegisterLocal(); };
-            linearLayout.AddView(btnLoginExternal);
-            linearLayout.AddView(txtRegister);
-            return linearLayout;
+            return view;
         }
     }
 }

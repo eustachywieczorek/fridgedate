@@ -7,59 +7,34 @@ namespace FridgeDate.Data.Repository
 {
     public class UnitOfWork : IUnitOfWork, IDisposable
     {
-        private FridgeDateContext context = new FridgeDateContext();
-        private IRepository<User> userRepository;
-        private IRepository<FoodItem> foodItemRepository;
-        private IRepository<FoodItemUser> foodItemForUserRepository;
+        private readonly FridgeDateContext _context = new FridgeDateContext();
+        private IRepository<User> _userRepository;
+        private IRepository<FoodItem> _foodItemRepository;
+        private IFoodItemsForUserRepository _foodItemForUserRepository;
 
         public async Task Save()
         {
-            await context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
         }
 
+        public IRepository<User> UserRepository => _userRepository ?? (_userRepository = new Repository<User>(_context));
+        public IRepository<FoodItem> FoodItemRepository => _foodItemRepository ?? (_foodItemRepository = new Repository<FoodItem>(_context));
 
-        public IRepository<User> UserRepository
-        {
-            get
-            {
-                if (userRepository == null)
-                    userRepository = new Repository<User>(context);
-                return userRepository;
-            }
-        }
-        public IRepository<FoodItem> FoodItemRepository
-        {
-            get
-            {
-                if (foodItemRepository == null)
-                    foodItemRepository = new Repository<FoodItem>(context);
-                return foodItemRepository;
-            }
-        }
-
-        public IRepository<FoodItemUser> FoodItemForUserRepository
-        {
-            get
-            {
-                if (foodItemForUserRepository == null)
-                    foodItemForUserRepository = new Repository<FoodItemUser>(context);
-                return foodItemForUserRepository;
-            }
-        }
+        public IFoodItemsForUserRepository FoodItemForUserRepository => _foodItemForUserRepository ?? (_foodItemForUserRepository = new FoodItemUserRepository(_context));
 
 
-        private bool disposed = false;
+        private bool _disposed = false;
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!this.disposed)
+            if (!this._disposed)
             {
                 if (disposing)
                 {
-                    context.Dispose();
+                    _context.Dispose();
                 }
             }
-            this.disposed = true;
+            this._disposed = true;
         }
 
         public void Dispose()

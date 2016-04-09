@@ -1,14 +1,12 @@
 
 using Android.App;
 using Android.OS;
-using Android.Widget;
 using FridgeDate.Android.Fragments;
 using FridgeDate.Core.Interfaces;
 using FridgeDate.Core.Responses;
 using Refit;
 using System.Linq;
 using System.Threading.Tasks;
-using Android.Views;
 using FridgeDate.Core.Resources;
 
 namespace FridgeDate.Android.Activities
@@ -27,6 +25,7 @@ namespace FridgeDate.Android.Activities
             {
                 await SetupExternalProviders();
             });
+            
             ShowLogin();
         }
 

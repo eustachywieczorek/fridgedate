@@ -10,39 +10,13 @@ namespace FridgeDate.Tests.Fakes
 {
     public class FakeUnitOfWork : IUnitOfWork
     {
-        private IRepository<User> userRepository;
-        private IRepository<FoodItem> foodItemRepository;
-        private IRepository<FoodItemUser> foodItemForUserRepository;
+        private IRepository<User> _userRepository;
+        private IRepository<FoodItem> _foodItemRepository;
+        private IFoodItemsForUserRepository _foodItemForUserRepository;
 
-        public IRepository<FoodItemUser> FoodItemForUserRepository
-        {
-            get
-            {
-                if (foodItemForUserRepository == null)
-                    foodItemForUserRepository = new FakeRepository<FoodItemUser>();
-                return foodItemForUserRepository;
-            }
-        }
-
-        public IRepository<FoodItem> FoodItemRepository
-        {
-            get
-            {
-                if (foodItemRepository == null)
-                    foodItemRepository = new FakeRepository<FoodItem>();
-                return foodItemRepository;
-            }
-        }
-
-        public IRepository<User> UserRepository
-        {
-            get
-            {
-                if (userRepository == null)
-                    userRepository = new FakeRepository<User>();
-                return userRepository;
-            }
-        }
+        public IFoodItemsForUserRepository FoodItemForUserRepository => _foodItemForUserRepository ?? (_foodItemForUserRepository = new FakeFoodItemUserRepository());
+        public IRepository<FoodItem> FoodItemRepository => _foodItemRepository ?? (_foodItemRepository = new FakeRepository<FoodItem>());
+        public IRepository<User> UserRepository => _userRepository ?? (_userRepository = new FakeRepository<User>());
 
         public Task Save()
         {

@@ -2,16 +2,30 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="fill_parent"
+    android:padding="@dimen/layoutPadding"
+    android:gravity="center">
     <Button
         android:text="Login with Facebook"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btnFacebook" />
+        android:background="@drawable/facebook_btn"
+        android:id="@+id/btnFacebook"
+        style="@style/button_text"
+        android:layout_marginTop="@dimen/buttonMargin" />
+    <Button
+        android:text="Login with Twitter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/twitter_btn"
+        android:id="@+id/btnTwitter"
+        style="@style/button_text"
+        android:layout_marginTop="@dimen/buttonMargin" />
     <TextView
-        android:text="or register with email and password"
+        android:text="or register using email"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/txtRegister" />
+        android:id="@+id/txtRegister"
+        android:layout_marginTop="5dp" />
 </LinearLayout>

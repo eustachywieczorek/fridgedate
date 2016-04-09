@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using AutoMapper;
 using FridgeDate.Core.Models;
+using FridgeDate.Data.Interfaces;
 using FridgeDate.Data.Repository;
 
 namespace FridgeDate.API.Controllers
@@ -14,7 +15,7 @@ namespace FridgeDate.API.Controllers
     [Route("foodItemUser")]
     public class FoodItemsForUserController : BaseApiController
     {
-        public FoodItemsForUserController(IMapper mapper, UnitOfWork unitOfWork) : base(mapper, unitOfWork)
+        public FoodItemsForUserController(IMapper mapper, IUnitOfWork unitOfWork) : base(mapper, unitOfWork)
         {
             
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -56,8 +57,8 @@ namespace FridgeDate.API
             //    consumerSecret: "");
 
             app.UseFacebookAuthentication(
-                appId: "185612891797560",
-                appSecret: "08a811e19cf7f9374af57b9670560e0a");
+                appId: ConfigurationManager.AppSettings["FacebookId"],
+                appSecret: ConfigurationManager.AppSettings["FacebookSecret"]);
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{

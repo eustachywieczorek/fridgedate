@@ -38,7 +38,9 @@
   <ItemGroup>
     <Compile Include="DTO\ExternalLogin.cs" />
     <Compile Include="Interfaces\IAccountApi.cs" />
+    <Compile Include="Interfaces\IAppContext.cs" />
     <Compile Include="Interfaces\IFridgeDateApi.cs" />
+    <Compile Include="Interfaces\IUserApi.cs" />
     <Compile Include="Models\BarCode.cs" />
     <Compile Include="Models\BarCodeType.cs" />
     <Compile Include="Models\FoodItem.cs" />
@@ -61,7 +63,9 @@
     <Compile Include="Responses\FoodItemResponse.cs" />
     <Compile Include="Responses\ManageInfoResponse.cs" />
     <Compile Include="Responses\UserResponse.cs" />
+    <Compile Include="Services\AppContext.cs" />
     <Compile Include="Settings\Values.cs" />
+    <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -74,6 +78,10 @@
     </Reference>
     <Reference Include="Refit, Version=2.4.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\refit.2.4.1\lib\Portable-Net45+NetCore45+WP8+WPA81\Refit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Splat, Version=1.6.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Splat.1.6.2\lib\Portable-net45+win+wpa81+wp80\Splat.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>

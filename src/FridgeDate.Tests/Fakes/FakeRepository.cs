@@ -11,25 +11,25 @@ namespace FridgeDate.Tests.Fakes
 {
     public class FakeRepository<TEntity> : IRepository<TEntity> where TEntity : class
     {
-        private Dictionary<string, TEntity> _collection;
+        protected readonly Dictionary<string, TEntity> Collection;
         public FakeRepository()
         {
-            _collection = new Dictionary<string, TEntity>();
+            Collection = new Dictionary<string, TEntity>();
         }
         public TEntity Delete(TEntity entityToDelete)
         {
-            if (_collection.ContainsValue(entityToDelete))
-                return DeleteById(_collection.First(e => e.Value == entityToDelete).Key);
+            if (Collection.ContainsValue(entityToDelete))
+                return DeleteById(Collection.First(e => e.Value == entityToDelete).Key);
             return null;
         }
 
         public TEntity DeleteById(object id)
         {
             string key = id.ToString();
-            if (_collection.ContainsKey(key))
+            if (Collection.ContainsKey(key))
             {
-                var entityToDelete = _collection[key];
-                _collection.Remove(key);
+                var entityToDelete = Collection[key];
+                Collection.Remove(key);
                 return entityToDelete;
             }
 
@@ -41,8 +41,8 @@ namespace FridgeDate.Tests.Fakes
             return await Task.Run<IEnumerable<TEntity>>(() =>
             {
                 if (filter != null)
-                    return _collection.Values.AsQueryable().Where(filter);
-                return _collection.Values;
+                    return Collection.Values.AsQueryable().Where(filter);
+                return Collection.Values;
             });
         }
 
@@ -51,8 +51,8 @@ namespace FridgeDate.Tests.Fakes
             return await Task.Run(() =>
             {
                 string key = id.ToString();
-                if (_collection.ContainsKey(key))
-                    return _collection[key];
+                if (Collection.ContainsKey(key))
+                    return Collection[key];
                 return null;
             });
         }
@@ -62,21 +62,21 @@ namespace FridgeDate.Tests.Fakes
             var guid = Guid.NewGuid().ToString();
             dynamic e = entity;
             e.Id = guid;
-            _collection.Add(guid, e);
+            Collection.Add(guid, e);
             return e;
         }
 
         public TEntity Update(TEntity entityToUpdate)
         {
             dynamic e = entityToUpdate;
-            _collection.Remove(e.Id);
-            _collection.Add(e.Id, entityToUpdate);
+            Collection.Remove(e.Id);
+            Collection.Add(e.Id, entityToUpdate);
             return entityToUpdate;
         }
 
         public void Clear()
         {
-            _collection.Clear();
+            Collection.Clear();
         }
     }
 }
